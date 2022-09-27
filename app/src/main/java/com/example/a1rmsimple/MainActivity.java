@@ -15,7 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //TODO should this be the gridview? "Data to display"
-    //TODO Should these Strings be ints or will that just cause a type error?
+    //TODO Should these Strings be ints or will that cause a type error?
     private final List<String> mCalculation = new ArrayList<>();
     private final List<Integer> mPercentList = new ArrayList<>();
 
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         one_rm = findViewById(R.id.enter_max);
         percent = findViewById(R.id.rep_percent);
 
+        // list of percentages to display under each grid-item: from 70% to 110%
         int start = 70;
         for (int i = 0; i <= 8; i++) {
             mPercentList.add(start);
@@ -49,24 +50,23 @@ public class MainActivity extends AppCompatActivity {
             mCalculation.add("0");
         }
 
-        System.out.println(mCalculation);
+        System.out.println("mCalc" + mCalculation);
 
         mRecyclerView = findViewById(R.id.recyclerWeight);
 //        mRecyclerView.addItemDecoration(new GridItemDecoration(arg1, arg2));
         mAdapter = new RecycleViewAdapter(this, mCalculation, mPercentList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-
-
     }
 
+    // Method that calculates the percentage to be displayed in the gridItems
     public int doBasicMath(int percentageOfMax, int maxWeight){
         System.out.println("Percentage calculation");
         return (maxWeight * percentageOfMax)/100;
     }
 
         //TODO change to ontouchlistener. Does this click need to be handled in adapter?
-        //TODO should I separate the data to another class?
+        //TODO  separate the data/caluculation to another class
     public void updateWeightEditText(View view){
         if (!one_rm.getText().toString().equals("")){
             mCalculation.clear();
